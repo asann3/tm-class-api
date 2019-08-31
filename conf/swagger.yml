@@ -1,0 +1,92 @@
+openapi: 3.0.0
+
+info:
+  version: "0.0.0"
+  title: "授業情報API"
+
+servers:
+  - url: https://hogehoge.example.com/v1/
+
+paths:
+  "/dates/{date}/changes":
+    get:
+      summary: 1日の授業変更の一覧
+      description: 指定された日の授業変更の一覧を返します
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 成功
+          content:
+            "application/json":
+              schema:
+                $ref: '#/components/schemas/TimeTableChange'
+
+  "/classes/{class}/changes/{date}":
+    get:
+      summary: クラスの1日の授業変更の一覧
+      description: 指定されたクラス、日の授業変更の一覧を返します
+      parameters:
+        - name: class
+          in: path
+          description: 取得したいクラス
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          description: 取得したい日付
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Default response
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TimeTableChange'
+
+components:
+  schemas:
+    TimeTableChange:
+      type: object
+      properties:
+        changes:
+          type: array
+          items:
+            type: object
+            properties:
+              class:
+                type: string
+              from:
+                type: string
+                description: 変更前の教科
+              to:
+                type: string
+                description: 変更後の教科
+              times:
+                type: array
+                items:
+                  type: integer
+                  minimum: 1
+                  maximum: 8
+              date:
+                type: string
+                format: date
+          example:
+            - class: 2-5
+              from: 英語IIA
+              to: 化学II
+              time: [1, 2]
+              date: "2019-05-08"
+            - class: 2-5
+              from: 国語II
+              to: 物理I
+              time: [5]
+              date: "2019-05-08"
+
