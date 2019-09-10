@@ -18,6 +18,7 @@ paths:
           required: true
           schema:
             type: string
+            format: date
       responses:
         "200":
           description: 成功
@@ -25,8 +26,20 @@ paths:
             "application/json":
               schema:
                 $ref: '#/components/schemas/TimeTableChange'
+              example:
+                changes:
+                  - class: 2-5
+                    from: 英語IIA
+                    to: 化学II
+                    times: [1, 2]
+                    date: "2019-05-08"
+                  - class: 2-5
+                    from: 国語II
+                    to: 物理I
+                    times: [5]
+                    date: "2019-05-08"
 
-  "/classes/{class}/changes/{date}":
+  "/classes/{class}/dates/{date}/changes":
     get:
       summary: クラスの1日の授業変更の一覧
       description: 指定されたクラス、日の授業変更の一覧を返します
@@ -37,12 +50,14 @@ paths:
           required: true
           schema:
             type: string
+            pattern: "^[0-9]-[0-9]$"
         - name: date
           in: path
           description: 取得したい日付
           required: true
           schema:
             type: string
+            format: date
       responses:
         "200":
           description: Default response
@@ -63,6 +78,7 @@ components:
             properties:
               class:
                 type: string
+                description: 変更が相当するクラス
               from:
                 type: string
                 description: 変更前の教科
@@ -71,6 +87,7 @@ components:
                 description: 変更後の教科
               times:
                 type: array
+                description: 変更
                 items:
                   type: integer
                   minimum: 1
@@ -78,15 +95,14 @@ components:
               date:
                 type: string
                 format: date
-          example:
-            - class: 2-5
-              from: 英語IIA
-              to: 化学II
-              time: [1, 2]
-              date: "2019-05-08"
-            - class: 2-5
-              from: 国語II
-              to: 物理I
-              time: [5]
-              date: "2019-05-08"
-
+          # example:
+          #   - class: 2-5
+          #     from: 英語IIA
+          #     to: 化学II
+          #     time: [1, 2]
+          #     date: "2019-05-08"
+          #   - class: 2-5
+          #     from: 国語II
+          #     to: 物理I
+          #     time: [5]
+          #     date: "2019-05-08"
