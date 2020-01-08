@@ -37,8 +37,8 @@ for tr in trs:
     
     subjects = f.read().split()
     print(tds[1].contents[0])
-    # subjects = re.match(gen_re(subjects),tds[1].contents[0])
-    print(subjects)
+    subjects = re.match(gen_re(subjects),tds[1].contents[0])
+    # print(subjects)
     print(subjects.group(1))
     print(subjects.group(2))
     b_sub = subjects.group(1)
