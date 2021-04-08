@@ -9,7 +9,7 @@ RUN pip install -U pip && \
     pip install \
     pipenv \
     flake8 \
-    autopep8 \
+    yapf \
     flask
 
 WORKDIR /src
