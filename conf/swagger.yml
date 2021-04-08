@@ -1,108 +1,55 @@
 openapi: 3.0.0
 
 info:
-  version: "0.0.0"
   title: "授業情報API"
+  version: 1.0.0
 
 servers:
   - url: https://hogehoge.example.com/v1/
 
+# 学年クラス曜日を指定して時間割を受け取る
 paths:
-  "/dates/{date}/changes":
+  "/classes/{class}/{dayOfWeek}":
     get:
-      summary: 1日の授業変更の一覧
-      description: 指定された日の授業変更の一覧を返します
+      summary: "曜日を指定して1日の時間割を受け取る"
       parameters:
-        - name: date
+        - name: "class"
           in: path
-          required: true
-          schema:
-            type: string
-            format: date
+          type: integer
+        - name: "dayOfWeek"
+          in: path
+          type: string
       responses:
-        "200":
-          description: 成功
-          content:
-            "application/json":
-              schema:
-                $ref: '#/components/schemas/TimeTableChange'
-              example:
-                changes:
-                  - class: 2-5
-                    from: 英語IIA
-                    to: 化学II
-                    times: [1, 2]
-                    date: "2019-05-08"
-                  - class: 2-5
-                    from: 国語II
-                    to: 物理I
-                    times: [5]
-                    date: "2019-05-08"
+        200:
+          description: 成功時のレスポンス
+          schema:
+            type: object
+            properties:
+              id:
+                type: "integer"
+                format: "int64"
+                example: 1
+              name:
+                type: "string"
+                example: "論理回路ii"
+        404:
+          description: 失敗時のレスポンス
+          schema:
+            type: object
+            properties:
+              id:
+                type: "integer"
+                format: "int64"
+                example: 404
+              name:
+                type: "string"
+                example: "失敗"
+    # /classes/{class}/{dayOfWeek}/{time}
+    # get:
+    #   summary: "曜日と時間を指定してその時間の科目を受け取る"
+  # /classes/{class}/{dayOfWeek}
 
-  "/classes/{class}/dates/{date}/changes":
-    get:
-      summary: クラスの1日の授業変更の一覧
-      description: 指定されたクラス、日の授業変更の一覧を返します
-      parameters:
-        - name: class
-          in: path
-          description: 取得したいクラス
-          required: true
-          schema:
-            type: string
-            pattern: "^[0-9]-[0-9]$"
-        - name: date
-          in: path
-          description: 取得したい日付
-          required: true
-          schema:
-            type: string
-            format: date
-      responses:
-        "200":
-          description: Default response
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/TimeTableChange'
+# patchで学期ごとに時間割を更新?
 
 components:
   schemas:
-    TimeTableChange:
-      type: object
-      properties:
-        changes:
-          type: array
-          items:
-            type: object
-            properties:
-              class:
-                type: string
-                description: 変更が相当するクラス
-              from:
-                type: string
-                description: 変更前の教科
-              to:
-                type: string
-                description: 変更後の教科
-              times:
-                type: array
-                description: 変更
-                items:
-                  type: integer
-                  minimum: 1
-                  maximum: 8
-              date:
-                type: string
-                format: date
-          # example:
-          #   - class: 2-5
-          #     from: 英語IIA
-          #     to: 化学II
-          #     time: [1, 2]
-          #     date: "2019-05-08"
-          #   - class: 2-5
-          #     from: 国語II
-          #     to: 物理I
-          #     time: [5]
-          #     date: "2019-05-08"
