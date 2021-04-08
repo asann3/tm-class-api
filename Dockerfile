@@ -6,13 +6,17 @@ ENV LC_ALL=C.UTF-8 \
 
 # Setup pipenv
 RUN pip install -U pip && \
-    pip install pipenv
+    pip install \
+    pipenv \
+    flake8 \
+    autopep8 \
+    flask
 
 WORKDIR /src
 
 # Install dependencies
-COPY Pipfile Pipfile.lock ./
-RUN pipenv install --system --ignore-pipfile --deploy
+# COPY Pipfile Pipfile.lock ./
+# RUN pipenv install --system --ignore-pipfile --deploy
 
 # Copy source codes
 COPY . .
