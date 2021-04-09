@@ -37,7 +37,6 @@
 		},
 		// python
 		"python.pythonPath": "/usr/local/bin/python",
-		// "python.linting.pylintEnabled": false,
 		"python.linting.flake8Enabled": true,
 		"python.linting.flake8Args": [
 			"--ignore=E402,E501"
