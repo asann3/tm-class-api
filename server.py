@@ -1,13 +1,11 @@
 from flask import Flask, jsonify, request
-# , Response
-# import json
+import os
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config["JSON_SORT_KEYS"] = False  # ソートをそのまま
 
-# url =
-
+# APP_ROOT = os.getenv("APP_ROOT")
 
 @app.route('/', methods=['GET'])
 def index():
@@ -16,7 +14,10 @@ def index():
 
 # 範囲外(7, 8などがない場合や, 9時間目以上)
 # 教員名, apiのversion, 変更しやすさ
-
+# ルートディレクトリに何を配置するか
+# エラーハンドリング
+# urlのフィールド
+# エンドポイントのスラッシュ 有無
 
 @app.route('/classes/4/5/<dayOfWeek>', methods=['GET'])
 def foo(dayOfWeek):
@@ -120,13 +121,8 @@ def foo(dayOfWeek):
             }]
         # else:
         #     data =
-    return jsonify({'status': 'OK', 'body': data}), 200
-
-    # return Response(response=json.dumps({
-    #     'status': 'OK',
-    #     'body': data
-    # }),
-    #                 status=200)
+        result = {'status': 'OK', 'data': data}
+    return jsonify(result), 200
 
 
 @app.errorhandler(400)
