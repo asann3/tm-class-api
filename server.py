@@ -1,11 +1,9 @@
 from flask import Flask, jsonify, request
-import os
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config["JSON_SORT_KEYS"] = False  # ソートをそのまま
 
-# APP_ROOT = os.getenv("APP_ROOT")
 
 @app.route('/', methods=['GET'])
 def index():
@@ -19,7 +17,7 @@ def index():
 # urlのフィールド
 # エンドポイントのスラッシュ 有無
 
-@app.route('/classes/4/5/<dayOfWeek>', methods=['GET'])
+@app.route('/api/v1/classes/4/5/<dayOfWeek>', methods=['GET'])
 def foo(dayOfWeek):
     if request.method == 'GET':
         if dayOfWeek == "Mon":
