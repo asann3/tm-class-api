@@ -1,0 +1,81 @@
+{
+    "allclass": [
+        {
+            "grade":1,
+            "classes": [
+                {
+                    "class": 1,
+                    "weeks": [
+                        {
+                            "week": "Mon",
+                            "subjects": [
+                                {
+                                    "time": 1,
+                                    "subject": ""
+                                }, {
+                                    "time": 2,
+                                    "subject": ""
+                                }, {
+                                    "time": 3,
+                                    "subject": ""
+                                }, {
+                                    "time": 4,
+                                    "subject": ""
+                                }, {
+                                    "time": 5,
+                                    "subject": ""
+                                }, {
+                                    "time": 6,
+                                    "subject": ""
+                                }
+                            ]
+                        },
+                        {"week":"Tue"}
+
+                ]},
+                {"class": 2},
+                {"class": 3},
+                {"class": 4},
+                {"class": 5}
+            ]
+        },
+        {
+            "grade":2,
+            "classes": [
+                {"class": 1},
+                {"class": 2},
+                {"class": 3},
+                {"class": 4},
+                {"class": 5}
+            ]},
+        {
+            "grade":3,
+            "classes": [
+                {"class": 1},
+                {"class": 2},
+                {"class": 3},
+                {"class": 4},
+                {"class": 5}
+            ]},
+        {
+            "grade":4,
+            "classes": [
+                {"class": 1},
+                {"class": 2},
+                {"class": 3},
+                {"class": 4},
+                {"class": 5}
+            ]},
+            
+        {
+            "grade":5,
+            "classes": [
+                {"class": 1},
+                {"class": 2},
+                {"class": 3},
+                {"class": 4},
+                {"class": 5}
+            ]}
+    ]
+}
+
