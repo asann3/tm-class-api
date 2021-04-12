@@ -47,6 +47,9 @@
 		"[python]": {
 			"editor.formatOnSave": true,
 			"editor.tabSize": 4
+		},
+		"[json]": {
+			"editor.formatOnSave": true
 		}
 	},
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
