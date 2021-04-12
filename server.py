@@ -1,8 +1,12 @@
 from flask import Flask, jsonify, request
+import json
+# import os
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config["JSON_SORT_KEYS"] = False  # ソートをそのまま
+json_open = open('data.json', 'r')
+json_load = json.load(json_open)
 
 
 @app.route('/', methods=['GET'])
@@ -17,8 +21,9 @@ def index():
 # urlのフィールド
 # エンドポイントのスラッシュ 有無
 
-@app.route('/api/v1/classes/4/5/<dayOfWeek>', methods=['GET'])
-def foo(dayOfWeek):
+
+@app.route('/api/v1/classes/<grade>/<course>/<dayOfWeek>', methods=['GET'])
+def foo(grade, course, dayOfWeek):
     if request.method == 'GET':
         if dayOfWeek == "Mon":
             data = [{
@@ -121,6 +126,15 @@ def foo(dayOfWeek):
         #     data =
         result = {'status': 'OK', 'data': data}
     return jsonify(result), 200
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('/favicon.ico')
+    # send_from_directory(
+    #     os.path.join(app.root_path, 'static/img'),
+    #     'favicon.ico',
+    # )
 
 
 @app.errorhandler(400)
