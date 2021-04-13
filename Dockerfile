@@ -10,7 +10,9 @@ RUN pip install -U pip && \
     pipenv \
     flake8 \
     yapf \
-    flask
+    flask && \
+    curl https://cli-assets.heroku.com/install.sh | sh
+
 
 WORKDIR /src
 
