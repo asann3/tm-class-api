@@ -10,7 +10,8 @@ RUN pip install -U pip && \
     pipenv \
     flake8 \
     yapf \
-    flask && \
+    flask \
+    gunicorn && \
     curl https://cli-assets.heroku.com/install.sh | sh
 
 
