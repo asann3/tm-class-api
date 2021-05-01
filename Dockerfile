@@ -12,7 +12,8 @@ RUN pip install -U pip && \
     yapf \
     flask \
     requests \
-    gunicorn && \
+    gunicorn \
+    pyppeteer && \
     curl https://cli-assets.heroku.com/install.sh | sh
 
 
