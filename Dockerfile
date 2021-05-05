@@ -13,7 +13,8 @@ RUN pip install -U pip && \
     flask \
     requests \
     gunicorn \
-    pyppeteer && \
+    pyppeteer \
+    python-dotenv && \
     curl https://cli-assets.heroku.com/install.sh | sh
 
 
