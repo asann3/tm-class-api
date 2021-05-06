@@ -14,7 +14,8 @@ RUN pip install -U pip && \
     requests \
     gunicorn \
     pyppeteer \
-    python-dotenv && \
+    python-dotenv \
+    pyotp && \
     curl https://cli-assets.heroku.com/install.sh | sh
 
 
