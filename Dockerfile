@@ -1,4 +1,4 @@
-FROM python:3.7.4
+FROM python:3.8.1
 
 # Setting
 ENV LC_ALL=C.UTF-8 \
@@ -11,7 +11,11 @@ RUN pip install -U pip && \
     flake8 \
     yapf \
     flask \
-    gunicorn && \
+    requests \
+    gunicorn \
+    pyppeteer \
+    python-dotenv \
+    pyotp && \
     curl https://cli-assets.heroku.com/install.sh | sh
 
 
