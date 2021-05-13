@@ -11,7 +11,3 @@ def get_totp_code():
 
     totp_now = totp.now()
     return totp_now
-
-
-# print(totp_now)
-# print(totp.verify(totp_now))
