@@ -15,7 +15,8 @@ RUN pip install -U pip && \
     gunicorn \
     pyppeteer \
     python-dotenv \
-    pyotp && \
+    pyotp \
+    pandas && \
     curl https://cli-assets.heroku.com/install.sh | sh
 
 
