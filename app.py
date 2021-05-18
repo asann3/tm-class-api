@@ -1,15 +1,39 @@
 from flask import Flask, jsonify, request
 import json
 import datetime as dt
-
-# import format_csv
 from format_csv import gen_changed_data
+
+# import atexit
+# from apscheduler.schedulers.background import BackgroundScheduler
+# from apscheduler.schedulers.blocking import BlockingScheduler
+# import schedule
+# import time
+# import format_csv
+# from get_changes import get_csvdata
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config["JSON_SORT_KEYS"] = False  # ソートをそのまま
 json_open = open('data.json', 'r')
 json_load = json.load(json_open)
+
+
+# sched = BlockingScheduler()
+# @sched.scheduled_job('interval', seconds=60)
+# def get_csv_data():
+#     print('hoge')
+#     # return get_csvdata
+
+# # sched = BackgroundScheduler(deamon=True)
+# # sched.add_job(get_csvdata, 'interval', seconds=60)
+
+# sched.start()
+
+# atexit.register(lambda: sched.shutdown())
+# schedule.every(1).minutes.do(get_csv_data())
+#     # while True:
+#         schedule.run_pending()
+#         time.sleep(1)
 
 
 def date_to_weekday(dates):
@@ -33,8 +57,8 @@ def foo(grade, course, dates):
     course = str(course)
     dates = str(dates)
     # flag = {"a": type(grade), "b": type(course), "c": type(dates)}
-    change = data_length
-    returnval = []
+    # change = data_length
+    # returnval = []
     dayOfWeek = date_to_weekday(dates)
     if request.method == 'GET':
         if dayOfWeek == "Mon":
@@ -230,11 +254,11 @@ def foo(grade, course, dates):
             # returnval.append({'len': data_length})
             for row in range(data_length):
 
-                returnval.append({
-                    # 'row': row,
-                    "time": time_period_list[row],
-                    'date': date_list[row]
-                })
+                # returnval.append({
+                #     # 'row': row,
+                #     "time": time_period_list[row],
+                #     'date': date_list[row]
+                # })
                 if dates == date_list[row] and course == course_list[
                         row] and grade == grade_list[row]:
                     data[time_period_list[row]][
@@ -249,8 +273,8 @@ def foo(grade, course, dates):
         result = {
             'status': 'OK',
             'data': data,
-            'changed': change,
-            'return': returnval
+            # 'changed': change,
+            # 'return': returnval
         }
     return jsonify(result), 200
 

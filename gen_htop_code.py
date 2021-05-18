@@ -11,3 +11,6 @@ def get_totp_code():
 
     totp_now = totp.now()
     return totp_now
+
+if __name__ == "__main__":
+    get_totp_code()
