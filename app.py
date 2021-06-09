@@ -1,39 +1,17 @@
 from flask import Flask, jsonify, request
 import json
 import datetime as dt
+import get_changes
 from format_csv import gen_changed_data
+from multiprocessing import Process
+# from threading import ThreadError
 
-# import atexit
-# from apscheduler.schedulers.background import BackgroundScheduler
-# from apscheduler.schedulers.blocking import BlockingScheduler
-# import schedule
-# import time
-# import format_csv
-# from get_changes import get_csvdata
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config["JSON_SORT_KEYS"] = False  # ソートをそのまま
 json_open = open('data.json', 'r')
 json_load = json.load(json_open)
-
-
-# sched = BlockingScheduler()
-# @sched.scheduled_job('interval', seconds=60)
-# def get_csv_data():
-#     print('hoge')
-#     # return get_csvdata
-
-# # sched = BackgroundScheduler(deamon=True)
-# # sched.add_job(get_csvdata, 'interval', seconds=60)
-
-# sched.start()
-
-# atexit.register(lambda: sched.shutdown())
-# schedule.every(1).minutes.do(get_csv_data())
-#     # while True:
-#         schedule.run_pending()
-#         time.sleep(1)
 
 
 def date_to_weekday(dates):
@@ -51,7 +29,7 @@ def index():
 
 @app.route('/api/v1/classes/<grade>/<course>/<dates>', methods=['GET'])
 def foo(grade, course, dates):
-    date_list, grade_list, course_list, time_period_list, subjects_after_change, data_length = gen_changed_data(
+    date_list, grade_list, course_list, time_period_list, subjects_after_change, data_length, line_count = gen_changed_data(
     )
     grade = str(grade)
     course = str(course)
@@ -273,6 +251,7 @@ def foo(grade, course, dates):
         result = {
             'status': 'OK',
             'data': data,
+            'csv_line': int(line_count),
             # 'changed': change,
             # 'return': returnval
         }
@@ -300,5 +279,14 @@ def favicon():
 #     }), error.code
 
 if __name__ == "__main__":
-    app.debug = True
+    # scheduler = AsyncIOScheduler()
+    # scheduler = BackgroundScheduler()
+    # scheduler.add_job(fuga, trigger='interval', seconds=10)
+    # scheduler.start()
+    # asyncio.get_event_loop().run_forever()
+    p = Process(target=get_changes.main)
+    p.start()
+    app.debug = False # debugをTrueにするとmainが2度動いてしまう
     app.run(host='0.0.0.0', port=5000)
+    # , threaded=True)
+    # , use_reloader=False, threaded=False) True
