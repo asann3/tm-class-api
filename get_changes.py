@@ -64,6 +64,6 @@ async def get_change():
 def main():
     while True:
         asyncio.get_event_loop().run_until_complete(get_change())
-        time.sleep(60)
+        time.sleep(3600)
 if __name__ == "__main__":
     main()
