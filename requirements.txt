@@ -11,7 +11,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
 mccabe==0.6.1
-pipenv==2020.11.15
+pipenv==2022.1.8
 pycodestyle==2.7.0
 pyflakes==2.3.1
 six==1.15.0
